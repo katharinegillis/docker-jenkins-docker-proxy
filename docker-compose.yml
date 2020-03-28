@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  jenkins-docker-proxy:
+    image: tecnativa/docker-socket-proxy
+    container_name: jenkins-docker-proxy
+    restart: always
+    environment:
+      EVENTS: 0
+      VERSION: 0
+      BUILD: 1
+      POST: 1
+      SESSION: 1
+      IMAGES: 1
+      INFO: 1
+      CONTAINERS: 1
+      EXEC: 1
+      NETWORKS: 1
+      AUTH: 1
+    ports:
+      - 2375
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+networks:
+  default:
+    name: jenkins-docker-proxy
